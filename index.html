@@ -423,38 +423,53 @@
             margin-bottom: 2rem; 
         }
         
-        .gallery { 
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                .gallery { 
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
             margin: 1.5rem 0;
         }
         
         .gallery figure {
-            background: white;
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFFFFF 100%);
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--roxo-uv);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
         }
         
-        .gallery figure:hover {
-            transform: translateY(-5px);
+        .gallery figure:nth-child(2) {
+            background: linear-gradient(135deg, #EAFBF3 0%, #FFFFFF 100%);
+            border-top-color: var(--verde-agua);
+        }
+        
+        .gallery figure:nth-child(3) {
+            background: linear-gradient(135deg, #FDEEE8 0%, #FFFFFF 100%);
+            border-top-color: var(--laranja);
         }
         
         .gallery img { 
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            max-height: 280px;
+            object-fit: contain;
             border-radius: 8px; 
-            border: 2px solid #ccc; 
+            border: 2px solid #ddd; 
+            background: white;
         }
         
         .gallery figcaption {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            color: #666;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: #333;
             text-align: center;
+            padding: 0 0.5rem;
+            line-height: 1.5;
         }
         
         .code-block { 
