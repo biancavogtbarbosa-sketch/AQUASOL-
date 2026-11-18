@@ -572,9 +572,107 @@
         }
         
         body.modo-escuro .concept-card, 
-        body.modo-escuro .simulator-box { 
-            background-color: rgba(22,33,62,0.95); 
-            color: var(--texto-claro); 
+body.modo-escuro .simulator-box,
+body.modo-escuro .physics-question,
+body.modo-escuro .accessibility-feature,
+body.modo-escuro .gallery figure,
+body.modo-escuro .code-block,
+body.modo-escuro .hero-section,
+body.modo-escuro .progress-container,
+body.modo-escuro .bar-bg { 
+    background-color: #1a1a2e !important; 
+    color: #FFFFFF !important; 
+}
+
+body.modo-escuro h1,
+body.modo-escuro h2,
+body.modo-escuro h3,
+body.modo-escuro h4,
+body.modo-escuro p,
+body.modo-escuro li,
+body.modo-escuro span,
+body.modo-escuro strong,
+body.modo-escuro figcaption,
+body.modo-escuro .bar-label,
+body.modo-escuro .slogan {
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .concept-card {
+    border-top-color: #00B4D8 !important;
+}
+
+body.modo-escuro .physics-question {
+    background: linear-gradient(135deg, rgba(255,209,102,0.3), rgba(0,180,216,0.3)) !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .accessibility-feature {
+    background: rgba(26,26,46,0.95) !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .gallery figure {
+    background: #1a1a2e !important;
+}
+
+body.modo-escuro .gallery figcaption {
+    color: #CCCCCC !important;
+}
+
+body.modo-escuro .code-block {
+    background: #0d0d0d !important;
+    color: #d4d4d4 !important;
+}
+
+body.modo-escuro footer {
+    background: rgba(10,10,30,0.95) !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .tab-link {
+    background: rgba(255,255,255,0.1) !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .tab-link.active {
+    background: rgba(255,255,255,0.2) !important;
+    color: #FFD166 !important;
+}
+
+body.modo-escuro .btn-primary {
+    background: #00B4D8 !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .btn-secondary {
+    background: #06D6A0 !important;
+    color: #000000 !important;
+}
+
+body.modo-escuro .serial-monitor {
+    background: #000000 !important;
+    color: #00FF00 !important;
+}
+
+body.modo-escuro .arduino-board {
+    background: #1a1a2e !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .greenhouse-diagram {
+    background: linear-gradient(to bottom, #1a3a5c 0%, #0d1b2a 100%) !important;
+}
+
+body.modo-escuro select,
+body.modo-escuro input[type="range"] {
+    background: #1a1a2e !important;
+    color: #FFFFFF !important;
+}
+
+body.modo-escuro .bar-bg {
+    background: #333333 !important;
+}
         }
         
         body.links-sublinhados a { 
@@ -583,11 +681,34 @@
         }
         
         body.reduzir-movimento *, 
-        body.reduzir-movimento *::before, 
-        body.reduzir-movimento *::after { 
-            animation-duration: 0.01ms !important; 
-            transition-duration: 0.01ms !important; 
-        }
+body.reduzir-movimento *::before, 
+body.reduzir-movimento *::after { 
+    animation-duration: 0.001ms !important; 
+    animation-iteration-count: 1 !important; 
+    transition-duration: 0.001ms !important; 
+}
+
+body.reduzir-movimento .sun-rays,
+body.reduzir-movimento .bubble,
+body.reduzir-movimento .wave,
+body.reduzir-movimento .light-ray,
+body.reduzir-movimento .sun-icon,
+body.reduzir-movimento .heat-arrows {
+    animation: none !important;
+    display: none !important;
+}
+
+body.reduzir-movimento .tab-content.active {
+    animation: none !important;
+}
+
+body.reduzir-movimento .gallery figure:hover {
+    transform: none !important;
+}
+
+body.reduzir-movimento .bar-fill {
+    transition: none !important;
+}
         
         .accessibility-bar { 
             position: fixed !important; 
