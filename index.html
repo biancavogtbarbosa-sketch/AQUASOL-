@@ -6,109 +6,473 @@
     <meta name="description" content="AQUASOL: Laboratório Virtual da Piscina Solar. Física, robótica e acessibilidade no aquecimento solar de piscinas.">
     <title>AQUASOL — Laboratório Virtual da Piscina Solar</title>
     
-    <!-- Fontes: Inter (padrão) e OpenDyslexic (acessibilidade) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/opendyslexic@1.0.3/opendyslexic.min.css" rel="stylesheet">
     
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-        <style>
-        :root { --azul-agua: #00B4D8; --azul-profundo: #0077B6; --verde-agua: #06D6A0; --amarelo-solar: #FFD166; --laranja: #F4A261; --coral: #E76F51; --roxo-uv: #7B2CBF; --fundo-claro: #FDF8F0; --texto-escuro: #1A1A1A; --fundo-escuro: #0B132B; --texto-claro: #E0E1DD; --fonte-padrao: 'Inter', sans-serif; --borda-raio: 8px; }
+    
+    <style>
+        :root { 
+            --azul-agua: #00B4D8; 
+            --azul-profundo: #0077B6; 
+            --verde-agua: #06D6A0; 
+            --amarelo-solar: #FFD166; 
+            --laranja: #F4A261; 
+            --coral: #E76F51; 
+            --roxo-uv: #7B2CBF; 
+            --fundo-claro: #FDF8F0; 
+            --texto-escuro: #1A1A1A; 
+            --fundo-escuro: #0B132B; 
+            --texto-claro: #E0E1DD; 
+            --fonte-padrao: 'Inter', sans-serif; 
+            --borda-raio: 8px; 
+        }
+        
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--fonte-padrao); background-color: var(--fundo-claro); color: var(--texto-escuro); line-height: 1.6; }
-        .skip-link { position: absolute; top: -40px; left: 0; background: var(--roxo-uv); color: white; padding: 8px; z-index: 1000; }
+        
+        body { 
+            font-family: var(--fonte-padrao); 
+            background-color: var(--fundo-claro); 
+            color: var(--texto-escuro); 
+            line-height: 1.6; 
+        }
+        
+        .skip-link { 
+            position: absolute; 
+            top: -40px; 
+            left: 0; 
+            background: var(--roxo-uv); 
+            color: white; 
+            padding: 8px; 
+            z-index: 1000; 
+        }
+        
         .skip-link:focus { top: 0; }
-        :focus-visible { outline: 3px solid var(--amarelo-solar); outline-offset: 2px; }
-        header { background: linear-gradient(135deg, var(--amarelo-solar), var(--azul-agua)); padding: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .logo-container { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .logo-container h1 { font-size: 1.8rem; color: var(--azul-profundo); }
-        .slogan { font-style: italic; color: var(--texto-escuro); font-size: 0.9rem; }
-        .mobile-menu-btn { display: block; width: 100%; padding: 0.8rem; background: var(--azul-profundo); color: white; border: none; border-radius: var(--borda-raio); font-size: 1.1rem; cursor: pointer; margin-bottom: 0.5rem; }
-        nav ul { list-style: none; display: none; flex-direction: column; gap: 0.5rem; }
+        
+        :focus-visible { 
+            outline: 3px solid var(--amarelo-solar); 
+            outline-offset: 2px; 
+        }
+        
+        header { 
+            background: linear-gradient(135deg, var(--amarelo-solar), var(--azul-agua)); 
+            padding: 1rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        
+        .logo-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+            margin-bottom: 1rem; 
+        }
+        
+        .logo-container h1 { 
+            font-size: 1.8rem; 
+            color: var(--azul-profundo); 
+        }
+        
+        .slogan { 
+            font-style: italic; 
+            color: var(--texto-escuro); 
+            font-size: 0.9rem; 
+        }
+        
+        .mobile-menu-btn { 
+            display: block; 
+            width: 100%; 
+            padding: 0.8rem; 
+            background: var(--azul-profundo); 
+            color: white; 
+            border: none; 
+            border-radius: var(--borda-raio); 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        nav ul { 
+            list-style: none; 
+            display: none; 
+            flex-direction: column; 
+            gap: 0.5rem; 
+        }
+        
         nav ul.expanded { display: flex; }
-        .tab-link { display: block; padding: 0.8rem; text-decoration: none; color: var(--texto-escuro); background: rgba(255,255,255,0.7); border-radius: var(--borda-raio); font-weight: 600; text-align: center; border-left: 5px solid transparent; transition: all 0.3s; }
-        .tab-link.active { background: white; border-left-color: var(--coral); color: var(--azul-profundo); }
-        main { padding: 1rem; max-width: 1200px; margin: 0 auto; }
+        
+        .tab-link { 
+            display: block; 
+            padding: 0.8rem; 
+            text-decoration: none; 
+            color: var(--texto-escuro); 
+            background: rgba(255,255,255,0.7); 
+            border-radius: var(--borda-raio); 
+            font-weight: 600; 
+            text-align: center; 
+            border-left: 5px solid transparent; 
+            transition: all 0.3s; 
+        }
+        
+        .tab-link.active { 
+            background: white; 
+            border-left-color: var(--coral); 
+            color: var(--azul-profundo); 
+        }
+        
+        main { 
+            padding: 1rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        
         .tab-content.hidden { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .hero-section { text-align: center; padding: 2rem 1rem; background: linear-gradient(to bottom, var(--amarelo-solar), var(--fundo-claro)); border-radius: var(--borda-raio); margin-bottom: 2rem; }
-        .concept-card { background: white; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: var(--borda-raio); box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-top: 4px solid var(--azul-agua); }
-        .concept-card:nth-child(even) { border-top-color: var(--verde-agua); }
-        .formula { background: var(--fundo-claro); padding: 1rem; border-left: 4px solid var(--roxo-uv); font-family: 'Courier New', monospace; font-weight: bold; margin: 1rem 0; text-align: center; font-size: 1.1rem; }
-        .simulator-box { background: white; padding: 1.5rem; border-radius: var(--borda-raio); margin-bottom: 2rem; border: 2px solid var(--azul-agua); }
-        .sim-controls { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; align-items: center; }
-        .btn-primary, .btn-secondary { padding: 0.6rem 1.2rem; border: none; border-radius: var(--borda-raio); cursor: pointer; font-weight: bold; font-size: 1rem; }
-        .btn-primary { background: var(--azul-profundo); color: white; }
-        .btn-secondary { background: var(--verde-agua); color: var(--texto-escuro); }
-        .bar-bg { background: #eee; height: 20px; border-radius: 10px; margin-bottom: 0.5rem; overflow: hidden; }
-        .bar-fill { height: 100%; transition: width 0.5s ease-out; }
-        .arduino-board { background: #2C3E50; color: white; padding: 1rem; border-radius: var(--borda-raio); font-family: monospace; }
-        .leds-container { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
-        .led { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
-        .led.red.on { background: #FF0000; box-shadow: 0 0 10px #FF0000; }
+        
+        .tab-content.active { 
+            display: block; 
+            animation: fadeIn 0.5s ease-in-out; 
+        }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        .hero-section { 
+            text-align: center; 
+            padding: 2rem 1rem; 
+            background: linear-gradient(to bottom, var(--amarelo-solar), var(--fundo-claro)); 
+            border-radius: var(--borda-raio); 
+            margin-bottom: 2rem; 
+        }
+        
+        .concept-card { 
+            background: white; 
+            padding: 1.5rem; 
+            margin-bottom: 1.5rem; 
+            border-radius: var(--borda-raio); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+            border-top: 4px solid var(--azul-agua); 
+        }
+        
+        .concept-card:nth-child(even) { 
+            border-top-color: var(--verde-agua); 
+        }
+        
+        .formula { 
+            background: var(--fundo-claro); 
+            padding: 1rem; 
+            border-left: 4px solid var(--roxo-uv); 
+            font-family: 'Courier New', monospace; 
+            font-weight: bold; 
+            margin: 1rem 0; 
+            text-align: center; 
+            font-size: 1.1rem; 
+        }
+        
+        .simulator-box { 
+            background: white; 
+            padding: 1.5rem; 
+            border-radius: var(--borda-raio); 
+            margin-bottom: 2rem; 
+            border: 2px solid var(--azul-agua); 
+        }
+        
+        .sim-controls { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+            margin: 1rem 0; 
+            align-items: center; 
+        }
+        
+        .btn-primary, .btn-secondary { 
+            padding: 0.6rem 1.2rem; 
+            border: none; 
+            border-radius: var(--borda-raio); 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 1rem; 
+        }
+        
+        .btn-primary { 
+            background: var(--azul-profundo); 
+            color: white; 
+        }
+        
+        .btn-secondary { 
+            background: var(--verde-agua); 
+            color: var(--texto-escuro); 
+        }
+        
+        .bar-bg { 
+            background: #eee; 
+            height: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 0.5rem; 
+            overflow: hidden; 
+        }
+        
+        .bar-fill { 
+            height: 100%; 
+            transition: width 0.5s ease-out; 
+        }
+        
+        .arduino-board { 
+            background: #2C3E50; 
+            color: white; 
+            padding: 1rem; 
+            border-radius: var(--borda-raio); 
+            font-family: monospace; 
+        }
+        
+        .leds-container { 
+            display: flex; 
+            gap: 1rem; 
+            align-items: center; 
+            margin-bottom: 1rem; 
+        }
+        
+        .led { 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 50%; 
+            border: 2px solid rgba(255,255,255,0.3); 
+        }
+        
+        .led.red.on { 
+            background: #FF0000; 
+            box-shadow: 0 0 10px #FF0000; 
+        }
+        
         .led.red.off { background: #550000; }
-        .led.green.on { background: #00FF00; box-shadow: 0 0 10px #00FF00; }
+        
+        .led.green.on { 
+            background: #00FF00; 
+            box-shadow: 0 0 10px #00FF00; 
+        }
+        
         .led.green.off { background: #003300; }
-        .serial-monitor { background: black; color: #00FF00; padding: 0.5rem; border-radius: 4px; font-size: 0.9rem; min-height: 60px; }
-        body.presentation-mode { font-size: 1.5rem; line-height: 1.8; }
-        body.presentation-mode .concept-card { padding: 2rem; margin-bottom: 2rem; }
-        .gallery { display: flex; flex-direction: column; gap: 1rem; }
-        .gallery img { max-width: 100%; border-radius: 8px; border: 2px solid #ccc; }
-        .code-block { background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: monospace; }
+        
+        .serial-monitor { 
+            background: black; 
+            color: #00FF00; 
+            padding: 0.5rem; 
+            border-radius: 4px; 
+            font-size: 0.9rem; 
+            min-height: 60px; 
+        }
+        
+        body.presentation-mode { 
+            font-size: 1.5rem; 
+            line-height: 1.8; 
+        }
+        
+        body.presentation-mode .concept-card { 
+            padding: 2rem; 
+            margin-bottom: 2rem; 
+        }
+        
+        .gallery { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1rem; 
+        }
+        
+        .gallery img { 
+            max-width: 100%; 
+            border-radius: 8px; 
+            border: 2px solid #ccc; 
+        }
+        
+        .code-block { 
+            background: #1e1e1e; 
+            color: #d4d4d4; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            overflow-x: auto; 
+            font-family: monospace; 
+        }
+        
         .code-block .keyword { color: #569cd6; }
         .code-block .string { color: #ce9178; }
         .code-block .comment { color: #6a9955; }
+        
         @media (min-width: 768px) {
             .mobile-menu-btn { display: none; }
-            nav ul { display: flex; flex-direction: row; justify-content: space-around; }
-            .tab-link { flex: 1; text-align: center; border-left: none; border-bottom: 5px solid transparent; }
-            .tab-link.active { border-bottom-color: var(--coral); border-left: none; }
-            .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-            .simulator-box { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; }
+            nav ul { 
+                display: flex; 
+                flex-direction: row; 
+                justify-content: space-around; 
+            }
+            .tab-link { 
+                flex: 1; 
+                text-align: center; 
+                border-left: none; 
+                border-bottom: 5px solid transparent; 
+            }
+            .tab-link.active { 
+                border-bottom-color: var(--coral); 
+                border-left: none; 
+            }
+            .about-grid { 
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                gap: 1.5rem; 
+            }
+            .simulator-box { 
+                display: grid; 
+                grid-template-columns: 1fr 2fr; 
+                gap: 2rem; 
+                align-items: start; 
+            }
             .sim-display { grid-column: 2; }
         }
-        body.fonte-dislexia { font-family: 'OpenDyslexic', 'Inter', sans-serif !important; letter-spacing: 0.05em; word-spacing: 0.1em; line-height: 1.8 !important; }
-        body.alto-contraste { background-color: #000000 !important; color: #FFFF00 !important; }
-        body.alto-contraste .concept-card, body.alto-contraste .simulator-box, body.alto-contraste header { background-color: #000000 !important; color: #FFFF00 !important; border: 2px solid #FFFF00 !important; box-shadow: none !important; }
-        body.alto-contraste a, body.alto-contraste .btn-primary, body.alto-contraste .btn-secondary { background-color: #FFFF00 !important; color: #000000 !important; font-weight: bold; text-decoration: underline; }
-        body.modo-escuro { background-color: var(--fundo-escuro); color: var(--texto-claro); }
-        body.modo-escuro .concept-card, body.modo-escuro .simulator-box { background-color: #16213E; color: var(--texto-claro); }
-        body.links-sublinhados a { text-decoration: underline !important; text-underline-offset: 3px; }
-        body.reduzir-movimento *, body.reduzir-movimento *::before, body.reduzir-movimento *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        .accessibility-bar { position: fixed !important; bottom: 20px !important; right: 20px !important; left: auto !important; top: auto !important; z-index: 9999 !important; }
-        #toggle-access-menu { background: #7B2CBF !important; color: white !important; border: none !important; padding: 12px 20px !important; border-radius: 30px !important; font-weight: bold !important; cursor: pointer !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important; font-size: 1rem !important; }
-        .access-options { position: absolute !important; bottom: 60px !important; right: 0 !important; left: auto !important; background: white !important; border: 2px solid #7B2CBF !important; border-radius: 8px !important; padding: 10px !important; display: flex !important; flex-direction: column !important; gap: 8px !important; width: 200px !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important; }
+        
+        body.fonte-dislexia { 
+            font-family: 'OpenDyslexic', 'Inter', sans-serif !important; 
+            letter-spacing: 0.05em; 
+            word-spacing: 0.1em; 
+            line-height: 1.8 !important; 
+        }
+        
+        body.alto-contraste { 
+            background-color: #000000 !important; 
+            color: #FFFF00 !important; 
+        }
+        
+        body.alto-contraste .concept-card, 
+        body.alto-contraste .simulator-box, 
+        body.alto-contraste header { 
+            background-color: #000000 !important; 
+            color: #FFFF00 !important; 
+            border: 2px solid #FFFF00 !important; 
+            box-shadow: none !important; 
+        }
+        
+        body.alto-contraste a, 
+        body.alto-contraste .btn-primary, 
+        body.alto-contraste .btn-secondary { 
+            background-color: #FFFF00 !important; 
+            color: #000000 !important; 
+            font-weight: bold; 
+            text-decoration: underline; 
+        }
+        
+        body.modo-escuro { 
+            background-color: var(--fundo-escuro); 
+            color: var(--texto-claro); 
+        }
+        
+        body.modo-escuro .concept-card, 
+        body.modo-escuro .simulator-box { 
+            background-color: #16213E; 
+            color: var(--texto-claro); 
+        }
+        
+        body.links-sublinhados a { 
+            text-decoration: underline !important; 
+            text-underline-offset: 3px; 
+        }
+        
+        body.reduzir-movimento *, 
+        body.reduzir-movimento *::before, 
+        body.reduzir-movimento *::after { 
+            animation-duration: 0.01ms !important; 
+            transition-duration: 0.01ms !important; 
+        }
+        
+        .accessibility-bar { 
+            position: fixed !important; 
+            bottom: 20px !important; 
+            right: 20px !important; 
+            left: auto !important; 
+            top: auto !important; 
+            z-index: 9999 !important; 
+        }
+        
+        #toggle-access-menu { 
+            background: #7B2CBF !important; 
+            color: white !important; 
+            border: none !important; 
+            padding: 12px 20px !important; 
+            border-radius: 30px !important; 
+            font-weight: bold !important; 
+            cursor: pointer !important; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important; 
+            font-size: 1rem !important; 
+        }
+        
+        .access-options { 
+            position: absolute !important; 
+            bottom: 60px !important; 
+            right: 0 !important; 
+            left: auto !important; 
+            background: white !important; 
+            border: 2px solid #7B2CBF !important; 
+            border-radius: 8px !important; 
+            padding: 10px !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            gap: 8px !important; 
+            width: 200px !important; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important; 
+        }
+        
         .access-options.hidden { display: none !important; }
-        .access-options button { padding: 8px !important; background: #f0f0f0 !important; border: 1px solid #ccc !important; border-radius: 4px !important; cursor: pointer !important; text-align: left !important; font-size: 0.9rem !important; }
-        .access-options button:hover { background: #00B4D8 !important; color: white !important; }
+        
+        .access-options button { 
+            padding: 8px !important; 
+            background: #f0f0f0 !important; 
+            border: 1px solid #ccc !important; 
+            border-radius: 4px !important; 
+            cursor: pointer !important; 
+            text-align: left !important; 
+            font-size: 0.9rem !important; 
+        }
+        
+        .access-options button:hover { 
+            background: #00B4D8 !important; 
+            color: white !important; 
+        }
+        
+        /* Esconder barra roxa do topo (VLibras) */
+        [vw-access-button].active,
+        .vw-plugin-top-wrapper { 
+            display: none !important; 
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: #eee;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
-    <!-- Skip Link para Acessibilidade -->
     <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
 
-    <!-- Barra de Acessibilidade Flutuante -->
     <div class="accessibility-bar" role="region" aria-label="Ferramentas de Acessibilidade">
         <button id="toggle-access-menu" aria-expanded="false" aria-controls="access-options">♿ Acessibilidade</button>
         <div id="access-options" class="access-options hidden" role="group">
-            <button id="font-decrease" aria-label="Diminuir tamanho da fonte">A-</button>
-            <button id="font-reset" aria-label="Resetar tamanho da fonte">A</button>
-            <button id="font-increase" aria-label="Aumentar tamanho da fonte">A+</button>
-            <button id="toggle-dyslexic" aria-label="Ativar fonte para dislexia">Fonte Dislexia</button>
-            <button id="toggle-contrast" aria-label="Ativar alto contraste">Alto Contraste</button>
-            <button id="toggle-dark" aria-label="Alternar modo escuro">Modo Escuro</button>
-            <button id="toggle-underline" aria-label="Sublinhar todos os links">Sublinhar Links</button>
-            <button id="toggle-motion" aria-label="Reduzir animações">Reduzir Movimento</button>
-            <button id="speak-page" aria-label="Ouvir conteúdo da aba atual">🔊 Ler Conteúdo</button>
+            <button id="font-decrease" aria-label="Diminuir fonte">A-</button>
+            <button id="font-reset" aria-label="Resetar fonte">A</button>
+            <button id="font-increase" aria-label="Aumentar fonte">A+</button>
+            <button id="toggle-dyslexic" aria-label="Fonte para dislexia">Fonte Dislexia</button>
+            <button id="toggle-contrast" aria-label="Alto contraste">Alto Contraste</button>
+            <button id="toggle-dark" aria-label="Modo escuro">Modo Escuro</button>
+            <button id="toggle-underline" aria-label="Sublinhar links">Sublinhar Links</button>
+            <button id="toggle-motion" aria-label="Reduzir movimento">Reduzir Movimento</button>
+            <button id="speak-page" aria-label="Ouvir conteúdo">🔊 Ler Conteúdo</button>
         </div>
     </div>
 
     <header role="banner">
         <div class="logo-container">
-            <!-- Logo SVG Inline: Sol + Gota d'água -->
             <svg width="60" height="60" viewBox="0 0 100 100" aria-labelledby="logo-title" role="img">
-                <title id="logo-title">Logo AQUASOL: Sol amarelo com raios e uma gota d'água azul sobreposta</title>
+                <title id="logo-title">Logo AQUASOL: Sol amarelo com raios e uma gota d'água azul</title>
                 <circle cx="50" cy="50" r="25" fill="#FFD166" />
                 <g stroke="#FFD166" stroke-width="4">
                     <line x1="50" y1="10" x2="50" y2="20" />
@@ -127,9 +491,7 @@
                 <p class="slogan">Ciência que aquece, inclusão que transforma.</p>
             </div>
         </div>
-        
         <button class="mobile-menu-btn" aria-expanded="false" aria-controls="main-nav">☰ Menu</button>
-        
         <nav id="main-nav" role="navigation" aria-label="Navegação principal">
             <ul role="tablist" aria-label="Seções do site">
                 <li role="presentation"><a href="#inicio" role="tab" aria-selected="true" id="tab-inicio" class="tab-link active" data-color="#F4A261">Início</a></li>
@@ -144,8 +506,6 @@
     </header>
 
     <main id="conteudo-principal" role="main">
-        
-        <!-- ABA 1: INÍCIO -->
         <section id="inicio" role="tabpanel" aria-labelledby="tab-inicio" class="tab-content active">
             <div class="hero-section">
                 <h2>Bem-vindo ao Laboratório Virtual da Piscina Solar</h2>
@@ -155,206 +515,76 @@
 
             <div class="knowledge-trail" role="region" aria-label="Trilha do Conhecimento">
                 <h3>Sua Trilha do Conhecimento</h3>
-                <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso de leitura">
-                    <div id="progress-bar" class="progress-bar"></div>
+                <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso de leitura" style="background:#eee; height:20px; border-radius:10px; margin:10px 0;">
+                    <div id="progress-bar" class="progress-bar" style="background:var(--verde-agua); height:100%; width:0%; border-radius:10px; transition:width 0.5s;"></div>
                 </div>
-                <p id="trail-text">Você explorou 0% do conteúdo. Continue navegando pelas abas!</p>
-            </div>
-
-            <div class="quiz-section">
-                <h3>Quiz de Fixação</h3>
-                <div id="quiz-container">
-                    <p id="quiz-question">Qual lei da física descreve que a potência irradiada por um corpo é proporcional à quarta potência de sua temperatura absoluta?</p>
-                    <div class="quiz-options" role="group" aria-label="Opções de resposta">
-                        <button class="quiz-btn" data-correct="false" data-feedback="Incorreto. A Lei de Wien relaciona temperatura e comprimento de onda de pico, não a potência total irradiada.">Lei de Wien</button>
-                        <button class="quiz-btn" data-correct="true" data-feedback="Correto! A Lei de Stefan-Boltzmann (P = εσAT⁴) estabelece exatamente essa relação de proporcionalidade à quarta potência da temperatura em Kelvin.">Lei de Stefan-Boltzmann</button>
-                        <button class="quiz-btn" data-correct="false" data-feedback="Incorreto. A Lei de Kirchhoff trata da igualdade entre absortividade e emissividade em equilíbrio térmico.">Lei de Kirchhoff</button>
-                    </div>
-                    <div id="quiz-feedback" class="quiz-feedback" aria-live="polite"></div>
-                </div>
+                <p id="trail-text">Você explorou 0% do conteúdo. Continue navegando!</p>
             </div>
         </section>
 
-        <!-- ABA 2: FÍSICA -->
         <section id="fisica" role="tabpanel" aria-labelledby="tab-fisica" class="tab-content hidden">
             <h2>Física: Radiação Solar e Termodinâmica</h2>
-            
             <article class="concept-card">
-                <h3>1. O Espectro Eletromagnético Solar e Janelas Atmosféricas</h3>
-                <p>O Sol emite radiação eletromagnética em um amplo espectro, mas a maior parte da energia que atinge a superfície terrestre está concentrada na faixa do <strong>visível</strong> (400-700 nm), com contribuições significativas do <strong>ultravioleta (UV)</strong> e do <strong>infravermelho próximo (IR)</strong>. A atmosfera terrestre atua como um filtro seletivo: o ozônio absorve a maior parte do UV-C e UV-B nocivos, enquanto o vapor d'água e o CO₂ absorvem faixas específicas do infravermelho. As regiões do espectro que conseguem atravessar a atmosfera com pouca atenuação são chamadas de "janelas atmosféricas". Para a piscina, a janela do visível e do IR próximo é crucial, pois é onde reside a máxima densidade de energia solar capaz de penetrar na água.</p>
+                <h3>1. Conservação de Energia na Superfície: A + R + T = 1</h3>
+                <p>Quando a radiação incide sobre um material, a energia é conservada: <strong>α (Absortância)</strong> + <strong>ρ (Reflectância)</strong> + <strong>τ (Transmitância)</strong> = 1. Uma lona preta tem α ≈ 0,95, convertendo quase toda a luz em calor.</p>
             </article>
-
             <article class="concept-card">
-                <h3>2. Conservação de Energia na Superfície: A + R + T = 1</h3>
-                <p>Quando um fluxo de radiação incide sobre qualquer material (como a superfície da água ou uma lona), a energia deve ser conservada. Isso é formalizado pela equação adimensional:</p>
-                <div class="formula">α + ρ + τ = 1</div>
-                <ul>
-                    <li><strong>α (Absortância):</strong> Fração da energia incidente que é absorvida pelo material, convertendo-se em energia interna (calor). Adimensional (0 a 1).</li>
-                    <li><strong>ρ (Reflectância):</strong> Fração da energia que é "rebatida" pela superfície, retornando ao meio. Adimensional (0 a 1).</li>
-                    <li><strong>τ (Transmitância):</strong> Fração da energia que atravessa o material, continuando sua propagação no outro lado. Adimensional (0 a 1).</li>
-                </ul>
-                <p><em>Aplicação à piscina:</em> Uma lona preta fosca tem α ≈ 0,95, ρ ≈ 0,05 e τ ≈ 0. Quase toda a energia é convertida em calor na superfície da lona, que depois é transferida para a água por condução.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>3. Reflexão Especular vs. Difusa e a Cor dos Corpos</h3>
-                <p>A <strong>reflexão especular</strong> ocorre em superfícies lisas (como a água calma ou um espelho), onde os raios incidentes paralelos são refletidos em uma única direção, obedecendo à lei "ângulo de incidência = ângulo de reflexão". Já a <strong>reflexão difusa</strong> ocorre em superfícies microscopicamente rugosas (como concreto ou lona texturizada), espalhando a luz em todas as direções. É por isso que vemos a lona de qualquer ângulo.</p>
-                <p><strong>Por que superfícies escuras absorvem mais?</strong> Microscopicamente, a cor que percebemos é a luz que o material <em>reflete</em>. Um objeto preto possui uma estrutura molecular com bandas de energia que permitem transições eletrônicas para quase todos os comprimentos de onda do espectro visível. Os fótons incidentes transferem sua energia (E = h·f) para os elétrons do material, que rapidamente decaem, liberando essa energia como vibrações da rede cristalina (fônons), ou seja, calor. A reflectância (ρ) é mínima, logo, pela conservação (A+R+T=1), a absortância (A) é máxima.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>4. Leis da Radiação de Corpo Negro</h3>
-                <p>Um <strong>corpo negro</strong> é um modelo físico idealizado que absorve toda a radiação incidente (α = 1) e é o emissor térmico mais eficiente possível.</p>
-                <ul>
-                    <li><strong>Lei de Stefan-Boltzmann:</strong> <div class="formula">P = ε · σ · A · T⁴</div>
-                        Onde: <strong>P</strong> é a potência irradiada (Watts); <strong>ε</strong> é a emissividade da superfície (0 para espelho perfeito, 1 para corpo negro); <strong>σ</strong> é a constante de Stefan-Boltzmann (5,67 × 10⁻⁸ W·m⁻²·K⁻⁴); <strong>A</strong> é a área superficial (m²); <strong>T</strong> é a temperatura absoluta (Kelvin). <em>Nota:</em> A dependência com T⁴ significa que dobrar a temperatura aumenta a irradiação em 16 vezes!</li>
-                    <li><strong>Lei de Wien:</strong> <div class="formula">λ_max = b / T</div>
-                        Onde <strong>λ_max</strong> é o comprimento de onda de pico de emissão e <strong>b</strong> é a constante de Wien (2,898 × 10⁻³ m·K). Corpos mais quentes emitem luz em comprimentos de onda mais curtos (o Sol, a ~5800K, emite no visível; a piscina, a ~300K, emite no infravermelho longo).</li>
-                    <li><strong>Lei de Kirchhoff da Radiação:</strong> Em equilíbrio térmico, a emissividade (ε) de um corpo é igual à sua absortância (α). Um bom absorvedor é, obrigatoriamente, um bom emissor. É por isso que pintar a piscina de preto a faz aquecer rápido durante o dia, mas também perder calor rapidamente à noite se não for coberta.</li>
-                </ul>
+                <h3>2. Leis da Radiação de Corpo Negro</h3>
+                <p><strong>Lei de Stefan-Boltzmann:</strong> <div class="formula">P = ε · σ · A · T⁴</div>Onde P é potência, ε é emissividade, σ é a constante (5,67 × 10⁻⁸), A é área e T é temperatura em Kelvin. Dobrar a temperatura aumenta a irradiação em 16 vezes!</p>
             </article>
         </section>
 
-        <!-- ABA 3: MATERIAIS -->
         <section id="materiais" role="tabpanel" aria-labelledby="tab-materiais" class="tab-content hidden">
             <h2>Materiais e a Interação com a Piscina</h2>
-            
             <article class="concept-card">
                 <h3>1. O Vidro e o Efeito Estufa Seletivo</h3>
-                <p>O vidro possui uma propriedade óptica fundamental chamada <strong>seletividade espectral</strong>. Ele é altamente transparente à radiação solar de onda curta (visível e IR próximo), permitindo que essa energia atravesse e aqueça o interior. No entanto, o vidro é opaco à radiação infravermelha de onda longa (emitida por objetos à temperatura ambiente, como a água da piscina, conforme a Lei de Wien). Quando a água absorve a luz solar e tenta reemitir essa energia como IR longo, o vidro bloqueia essa saída. A energia fica "presa", aumentando a temperatura interna. Este é o mecanismo microscópico do efeito estufa, replicado em estufas agrícolas e coberturas de piscina.</p>
+                <p>O vidro é transparente à luz visível (onda curta), mas opaco ao infravermelho de onda longa emitido pela água aquecida. Isso "prende" o calor, elevando a temperatura interna.</p>
             </article>
-
             <article class="concept-card">
-                <h3>2. A Água: Por que a piscina parece azul?</h3>
-                <p>A água não é incolor; ela possui faixas de absorção seletiva. As moléculas de H₂O absorvem fortemente a radiação no extremo vermelho do espectro visível e no infravermelho. Quando a luz branca do sol penetra na água, os comprimentos de onda vermelhos são absorvidos nos primeiros metros (convertendo-se em calor), enquanto os comprimentos de onda azuis sofrem menos absorção e são espalhados (espalhamento de Rayleigh e Mie) de volta aos nossos olhos. Portanto, a cor azul é a luz que <em>não</em> foi absorvida. Para o aquecimento, essa absorção do vermelho/IR é excelente, pois deposita a energia térmica diretamente no volume do líquido.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>3. Lonas: Preta vs. Transparente vs. Branca</h3>
-                <p><strong>Lona Preta:</strong> Alta absortância (α ≈ 0,95). Aquece a própria lona rapidamente. O calor é transferido para a água por condução direta. É a mais eficiente para aquecimento direto, mas impede a passagem de luz para o fundo.</p>
-                <p><strong>Lona Transparente (Bolhas):</strong> Alta transmitância (τ ≈ 0,85) para a luz visível. A luz atravessa a lona e é absorvida pelo fundo e pela água. A lona atua principalmente como uma barreira física, reduzindo drasticamente as perdas por <strong>evaporação</strong> (que é a maior causa de perda de calor em piscinas, pois a vaporização consome 2260 kJ/kg de calor latente) e por convecção com o vento.</p>
-                <p><strong>Lona Branca:</strong> Alta reflectância (ρ ≈ 0,80). Reflete a maior parte da radiação solar. Não serve para aquecer, mas sim para manter a água fria em climas muito quentes, evitando o superaquecimento.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>4. Balanço Energético Simplificado</h3>
-                <p>A variação de temperatura da piscina é regida pelo balanço entre ganhos e perdas:</p>
-                <div class="formula">ΔE = (Ganho Solar) - (Perdas por Evaporação + Convecção + Radiação Noturna + Condução ao solo)</div>
-                <p>Uma cobertura transparente otimiza este balanço não necessariamente aumentando o "Ganho Solar" (ela pode até refletir 10% da luz), mas ao reduzir as "Perdas por Evaporação" em até 70%, o saldo líquido (ΔE) torna-se positivo e muito mais eficiente do que a água exposta.</p>
+                <h3>2. Balanço Energético Simplificado</h3>
+                <div class="formula">ΔE = (Ganho Solar) - (Perdas por Evaporação + Convecção + Radiação)</div>
+                <p>A cobertura transparente otimiza esse balanço ao reduzir as perdas por evaporação em até 70%.</p>
             </article>
         </section>
 
-        <!-- ABA 4: SIMULADORES -->
         <section id="simuladores" role="tabpanel" aria-labelledby="tab-simuladores" class="tab-content hidden">
             <h2>Simuladores Interativos</h2>
-            <p class="instruction">Use o teclado (Tab e Enter) ou o mouse para interagir. Os resultados são anunciados para leitores de tela.</p>
-
-            <!-- S1: FÓTON NA SUPERFÍCIE -->
-            <div class="simulator-box" id="sim-foton">
-                <h3>S1: Fóton na Superfície</h3>
-                <p><strong>Objetivo:</strong> Visualizar a conservação A + R + T = 1 em diferentes materiais.</p>
-                <div class="sim-controls">
-                    <label for="material-select">Escolha o Material:</label>
-                    <select id="material-select" aria-describedby="material-desc">
+            <div class="simulator-box">
+                <div>
+                    <h3>S1: Fóton na Superfície</h3>
+                    <select id="material-select" style="padding:8px; width:100%; margin-bottom:10px;">
                         <option value="preto">Preto Fosco (Lona)</option>
                         <option value="branco">Branco Refletivo</option>
                         <option value="agua">Água (Superfície)</option>
                         <option value="vidro">Vidro Transparente</option>
                     </select>
-                    <button id="btn-fire-photon" class="btn-primary">Disparar Feixe de Luz</button>
+                    <button id="btn-fire-photon" class="btn-primary" style="width:100%">Disparar Feixe de Luz</button>
                 </div>
                 <div class="sim-display" aria-live="polite">
-                    <div class="photon-canvas" id="photon-canvas" role="img" aria-label="Animação de fótons atingindo superfície"></div>
-                    <div class="bar-chart">
-                        <div class="bar-label">Absorção (A): <span id="val-a">0</span>%</div>
-                        <div class="bar-bg"><div id="bar-a" class="bar-fill" style="width: 0%; background: #E76F51;"></div></div>
-                        
-                        <div class="bar-label">Reflexão (R): <span id="val-r">0</span>%</div>
-                        <div class="bar-bg"><div id="bar-r" class="bar-fill" style="width: 0%; background: #FFD166;"></div></div>
-                        
-                        <div class="bar-label">Transmissão (T): <span id="val-t">0</span>%</div>
-                        <div class="bar-bg"><div id="bar-t" class="bar-fill" style="width: 0%; background: #00B4D8;"></div></div>
-                    </div>
-                </div>
-                <div class="sim-explanation" id="foton-explanation">
-                    <strong>O que observar:</strong> Selecione um material e dispare o feixe. Observe como a soma das três barras é sempre 100%.
+                    <div id="photon-canvas" style="height:100px; background:#f0f0f0; position:relative; border-radius:8px; margin-bottom:10px;"></div>
+                    <div class="bar-label">Absorção (A): <span id="val-a">0</span>%</div>
+                    <div class="bar-bg"><div id="bar-a" class="bar-fill" style="width: 0%; background: #E76F51;"></div></div>
+                    <div class="bar-label">Reflexão (R): <span id="val-r">0</span>%</div>
+                    <div class="bar-bg"><div id="bar-r" class="bar-fill" style="width: 0%; background: #FFD166;"></div></div>
+                    <div class="bar-label">Transmissão (T): <span id="val-t">0</span>%</div>
+                    <div class="bar-bg"><div id="bar-t" class="bar-fill" style="width: 0%; background: #00B4D8;"></div></div>
+                    <p id="foton-explanation" style="margin-top:10px; font-size:0.9rem;"></p>
                 </div>
             </div>
 
-            <!-- S2: COBERTURA DA PISCINA -->
-            <div class="simulator-box" id="sim-cobertura">
-                <h3>S2: Cobertura e Efeito Estufa</h3>
-                <p><strong>Objetivo:</strong> Comparar a temperatura ao longo de 12h com e sem cobertura.</p>
-                <div class="sim-controls">
-                    <button id="toggle-cover" class="btn-primary" aria-pressed="false">Cobertura: DESLIGADA</button>
-                    <button id="start-cycle" class="btn-secondary">Iniciar Ciclo Dia/Noite (12h)</button>
-                </div>
-                <div class="sim-display" aria-live="polite">
-                    <svg id="chart-cobertura" width="100%" height="200" viewBox="0 0 400 200" role="img" aria-label="Gráfico de linha mostrando temperatura ao longo do tempo">
-                        <!-- Eixos -->
-                        <line x1="30" y1="170" x2="380" y2="170" stroke="#333" stroke-width="2"/>
-                        <line x1="30" y1="170" x2="30" y2="20" stroke="#333" stroke-width="2"/>
-                        <text x="200" y="195" text-anchor="middle" font-size="12">Tempo (horas)</text>
-                        <text x="15" y="90" text-anchor="middle" font-size="12" transform="rotate(-90 15 90)">Temperatura (°C)</text>
-                        <!-- Linhas dinâmicas serão inseridas via JS -->
-                        <path id="line-sem-cobertura" d="" fill="none" stroke="#E76F51" stroke-width="2" stroke-dasharray="4"/>
-                        <path id="line-com-cobertura" d="" fill="none" stroke="#06D6A0" stroke-width="3"/>
-                    </svg>
-                    <p id="cobertura-status">Temperatura Final: -- °C</p>
-                </div>
-                <div class="sim-explanation">
-                    <strong>Pergunta para pensar:</strong> Por que a linha verde (com cobertura) mantém a temperatura mais alta mesmo após o "sol se pôr" no simulador? (Dica: pense na evaporação e na reemissão de IR).
-                </div>
-            </div>
-
-            <!-- S3: COR QUE AQUECE -->
-            <div class="simulator-box" id="sim-cor">
-                <h3>S3: Cor que Aquece (Albedo)</h3>
-                <p><strong>Objetivo:</strong> Relacionar a cor da lona com a taxa de aquecimento.</p>
-                <div class="sim-controls">
-                    <label for="cor-lona">Cor da Lona:</label>
-                    <select id="cor-lona">
-                        <option value="0.05">Preta (Albedo 0.05)</option>
-                        <option value="0.30">Azul (Albedo 0.30)</option>
-                        <option value="0.60">Verde Clara (Albedo 0.60)</option>
-                        <option value="0.85">Branca (Albedo 0.85)</option>
-                    </select>
-                    <button id="btn-aquecer-cor" class="btn-primary">Simular Aquecimento (1h)</button>
-                </div>
-                <div class="sim-display" aria-live="polite">
-                    <div id="lona-visual" style="width: 100px; height: 100px; background: #111; margin: 10px auto; border-radius: 8px; border: 2px solid #333;"></div>
-                    <p>Variação de Temperatura: <strong id="temp-variation">+0.0</strong> °C</p>
-                    <p id="albedo-ranking" class="small-text">Ranking de eficiência: Preta > Azul > Verde > Branca</p>
-                </div>
-            </div>
-
-            <!-- S4: PAINEL ARDUINO VIRTUAL -->
-            <div class="simulator-box" id="sim-arduino">
-                <h3>S4: Painel Arduino Virtual (Nosso Circuito)</h3>
-                <p><strong>Objetivo:</strong> Testar a lógica do nosso código com entradas simuladas.</p>
-                <div class="sim-controls">
-                    <div>
-                        <label for="sim-ldr">Luminosidade (LDR 0-1023): <span id="ldr-val">500</span></label>
-                        <input type="range" id="sim-ldr" min="0" max="1023" value="500" aria-valuemin="0" aria-valuemax="1023" aria-valuenow="500">
-                    </div>
-                    <div>
-                        <label for="sim-temp">Temperatura (Simulando ADC 0-1023, equivale a -40°C a 125°C): <span id="temp-adc-val">300</span></label>
-                        <input type="range" id="sim-temp" min="0" max="1023" value="300" aria-valuemin="0" aria-valuemax="1023" aria-valuenow="300">
-                    </div>
+            <div class="simulator-box">
+                <div>
+                    <h3>S4: Painel Arduino Virtual</h3>
+                    <label>Temperatura (Simulando ADC 0-1023): <span id="temp-adc-val">300</span></label>
+                    <input type="range" id="sim-temp" min="0" max="1023" value="300" style="width:100%; margin:10px 0;">
                 </div>
                 <div class="sim-display arduino-board" aria-live="polite">
                     <div class="leds-container">
-                        <div id="led-red-virtual" class="led red off" aria-label="LED Vermelho, desligado"></div>
-                        <span>Frio (< 28°C)</span>
-                        <div id="led-green-virtual" class="led green off" aria-label="LED Verde, desligado"></div>
-                        <span>Quente (>= 28°C)</span>
+                        <div id="led-red-virtual" class="led red off" aria-label="LED Vermelho, desligado"></div><span>Frio (< 28°C)</span>
+                        <div id="led-green-virtual" class="led green off" aria-label="LED Verde, desligado"></div><span>Quente (>= 28°C)</span>
                     </div>
-                    <div class="serial-monitor">
-                        <strong>Monitor Serial:</strong>
-                        <pre id="serial-output">Aguardando dados...</pre>
-                    </div>
-                    <div class="math-display">
-                        <p>Cálculo em tempo real:</p>
+                    <div class="serial-monitor"><strong>Monitor Serial:</strong><pre id="serial-output">Aguardando dados...</pre></div>
+                    <div style="margin-top:10px; font-size:0.9rem;">
                         <p>V = (<span id="calc-adc">300</span> / 1023) × 5 = <span id="calc-v">1.46</span> V</p>
                         <p>T = (<span id="calc-v2">1.46</span> - 0.5) × 100 = <strong><span id="calc-t">96.6</span> °C</strong></p>
                     </div>
@@ -362,43 +592,20 @@
             </div>
         </section>
 
-        <!-- ABA 5: ROBÓTICA -->
         <section id="robotica" role="tabpanel" aria-labelledby="tab-robotica" class="tab-content hidden">
             <h2>Robótica: O Cérebro do Aquecimento</h2>
-            
             <article class="concept-card">
-                <h3>1. Sensores e Atuadores: Conceitos Fundamentais</h3>
-                <p>Um <strong>sensor</strong> é um dispositivo que converte um fenômeno físico (grandeza de entrada) em um sinal elétrico mensurável (grandeza de saída). Um <strong>atuador</strong> faz o inverso: converte um sinal elétrico de controle em uma ação física (movimento, luz, calor).</p>
-                <p><strong>LDR (Light Dependent Resistor):</strong> É um fotorresistor. Sua resistência elétrica diminui drasticamente quando a intensidade da luz incidente aumenta (efeito fotoelétrico interno em semicondutores como o sulfeto de cádmio). No Arduino, usamos um divisor de tensão para converter essa variação de resistência em uma variação de tensão (0-5V), que o conversor Analógico-Digital (ADC) lê como um número entre 0 e 1023.</p>
-                <p><strong>TMP36:</strong> Sensor analógico de temperatura. Possui uma saída de tensão linearmente proporcional à temperatura em Celsius. Sua fórmula de conversão é derivada de suas especificações: ele possui um offset de 0,5V (que representa 0°C) e uma sensibilidade de 10 mV/°C (0,01 V/°C). Portanto, a tensão lida (V) menos o offset (0,5), dividida pela sensibilidade (0,01), resulta na temperatura. Simplificando: <strong>T(°C) = (V - 0,5) × 100</strong>. Sua faixa operacional é de -40°C a +125°C.</p>
-                <p><strong>ADC de 10 bits:</strong> O Arduino UNO mapeia 0V a 5V em 2¹⁰ = 1024 valores discretos (0 a 1023). Cada passo (ou "count") representa 5V / 1023 ≈ 4,88 mV.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>2. Evidências do Tinkercad (Nosso Protótipo)</h3>
+                <h3>1. Sensores e o Código</h3>
+                <p>O <strong>TMP36</strong> lê a temperatura. A fórmula é: <strong>T(°C) = (V - 0,5) × 100</strong>. O Arduino lê isso como um número de 0 a 1023 (ADC de 10 bits).</p>
+                <h3>2. Evidências do Tinkercad</h3>
                 <div class="gallery">
-                    <figure>
-                        <img src="assets/rob-1.png.jpg" alt="Captura de tela do Tinkercad mostrando o circuito com sensor no mínimo. O monitor serial exibe 'Luz: 0 | Temp: -40.22 C' e o LED vermelho está aceso." />
-                        <figcaption>Fig 1: Simulação com o sensor no mínimo: o monitor serial marca −40,22 °C e o LED VERMELHO acende (temperatura < 28 °C = piscina fria, precisa aquecer).</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/rob-2.png.jpg" alt="Captura de tela do Tinkercad com temperatura ambiente. Monitor serial exibe 'Luz: 450 | Temp: 21.85 C'. LED vermelho permanece aceso." />
-                        <figcaption>Fig 2: Temperatura ambiente (~21 °C): serial mostra 21,85 °C; como ainda está abaixo do limiar de 28 °C, o LED VERMELHO permanece aceso.</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/rob-3.png.jpg" alt="Captura de tela do Tinkercad com aquecimento intenso. Monitor serial exibe 'Luz: 900 | Temp: 65.84 C'. LED verde acende e vermelho apaga." />
-                        <figcaption>Fig 3: Aquecimento intenso (~66 °C): serial mostra 65,84 °C; acima de 28 °C o LED VERDE acende e o vermelho apaga (piscina aquecida).</figcaption>
-                    </figure>
+                    <figure><img src="assets/rob-1.png.jpg" alt="Tinkercad: -40°C, LED Vermelho aceso" /><figcaption>Fig 1: Temperatura −40,22 °C. LED VERMELHO aceso (fria).</figcaption></figure>
+                    <figure><img src="assets/rob-2.png.jpg" alt="Tinkercad: ~21°C, LED Vermelho aceso" /><figcaption>Fig 2: Temperatura 21,85 °C. LED VERMELHO aceso (abaixo de 28°C).</figcaption></figure>
+                    <figure><img src="assets/rob-3.png.jpg" alt="Tinkercad: ~66°C, LED Verde aceso" /><figcaption>Fig 3: Temperatura 65,84 °C. LED VERDE aceso (aquecida).</figcaption></figure>
                 </div>
-            </article>
-
-            <article class="concept-card">
-                <h3>3. O Código Fonte (Explicado)</h3>
-                <p>Este é o código exato carregado no nosso microcontrolador. Abaixo, a explicação do "bug do Tinkercad": em ambientes de simulação, o pino analógico pode ficar em "alta impedância" (floating), lendo ruído. Forçar um <code>INPUT_PULLUP</code> ativa um resistor interno que estabiliza o pino em HIGH. Após um breve <code>delay</code>, voltamos para <code>INPUT</code> para permitir a leitura analógica correta do divisor de tensão sem a interferência do pull-up.</p>
-                
-                <div class="code-block" tabindex="0" aria-label="Código Arduino em C++">
-<pre><code><span class="keyword">const int</span> pinoLDR = A0;
-<span class="keyword">const int</span> pinoTemp = A1;
+                <h3 style="margin-top:20px;">3. Nosso Código Fonte</h3>
+                <div class="code-block" tabindex="0">
+<pre><code><span class="keyword">const int</span> pinoTemp = A1;
 <span class="keyword">const int</span> ledVermelho = 8;
 <span class="keyword">const int</span> ledVerde = 9;
 
@@ -406,173 +613,183 @@
   pinMode(ledVermelho, OUTPUT);
   pinMode(ledVerde, OUTPUT);
   Serial.begin(9600);
-
-  <span class="comment">// LINHA MÁGICA QUE CORRIGE O BUG DO TINKERCAD:</span>
-  pinMode(pinoLDR, INPUT_PULLUP); <span class="comment">// Estabiliza o pino</span>
-  delay(100);                     <span class="comment">// Aguarda estabilização</span>
-  pinMode(pinoLDR, INPUT);        <span class="comment">// Volta ao normal para leitura analógica</span>
+  pinMode(pinoTemp, INPUT); 
 }
 
 <span class="keyword">void</span> loop() {
-  int valorLDR = analogRead(pinoLDR);
   int valorTempADC = analogRead(pinoTemp);
-  
-  <span class="comment">// Conversão ADC para Voltagem (0-5V)</span>
   float voltagem = (valorTempADC / 1023.0) * 5.0;
-  
-  <span class="comment">// Conversão Voltagem para Temperatura (Fórmula TMP36)</span>
   float temperaturaC = (voltagem - 0.5) * 100.0;
 
-  Serial.print(<span class="string">"Luz: "</span>);
-  Serial.print(valorLDR);
-  Serial.print(<span class="string">" | Temp: "</span>);
+  Serial.print(<span class="string">"Temp: "</span>);
   Serial.print(temperaturaC);
   Serial.println(<span class="string">" C"</span>);
 
-  <span class="comment">// Lógica de Controle dos Atuadores (LEDs)</span>
   if (temperaturaC < 28.0) {
-    digitalWrite(ledVermelho, HIGH); <span class="comment">// Acende: Precisa aquecer</span>
+    digitalWrite(ledVermelho, HIGH);
     digitalWrite(ledVerde, LOW);
   } else {
     digitalWrite(ledVermelho, LOW);
-    digitalWrite(ledVerde, HIGH);    <span class="comment">// Acende: Temperatura ideal</span>
+    digitalWrite(ledVerde, HIGH);
   }
-  delay(500); <span class="comment">// Intervalo para estabilidade de leitura</span>
+  delay(500);
 }</code></pre>
                 </div>
             </article>
-
-            <article class="concept-card">
-                <h3>4. Diagrama do Circuito e Proposta Futura</h3>
-                <svg width="100%" height="250" viewBox="0 0 500 250" role="img" aria-label="Diagrama esquemático do circuito Arduino com LDR, TMP36 e LEDs">
-                    <!-- Arduino Board -->
-                    <rect x="180" y="50" width="140" height="160" fill="#0077B6" rx="5" />
-                    <text x="250" y="130" fill="white" text-anchor="middle" font-weight="bold">Arduino UNO</text>
-                    
-                    <!-- LDR -->
-                    <circle cx="80" cy="80" r="20" fill="#FFD166" />
-                    <text x="80" y="85" text-anchor="middle" font-size="12">LDR</text>
-                    <line x1="100" y1="80" x2="180" y2="100" stroke="#333" stroke-width="2" />
-                    <text x="140" y="85" font-size="12">A0</text>
-
-                    <!-- TMP36 -->
-                    <rect x="60" y="160" width="40" height="30" fill="#E76F51" />
-                    <text x="80" y="180" text-anchor="middle" font-size="10" fill="white">TMP36</text>
-                    <line x1="100" y1="175" x2="180" y2="150" stroke="#333" stroke-width="2" />
-                    <text x="140" y="170" font-size="12">A1</text>
-
-                    <!-- LEDs -->
-                    <circle cx="380" cy="90" r="10" fill="#E76F51" />
-                    <text x="380" y="120" text-anchor="middle" font-size="12">Vermelho (8)</text>
-                    <line x1="320" y1="90" x2="370" y2="90" stroke="#333" stroke-width="2" />
-
-                    <circle cx="380" cy="170" r="10" fill="#06D6A0" />
-                    <text x="380" y="200" text-anchor="middle" font-size="12">Verde (9)</text>
-                    <line x1="320" y1="170" x2="370" y2="170" stroke="#333" stroke-width="2" />
-                </svg>
-                <p><strong>Nossa Proposta para a Piscina:</strong> O sistema atual é um protótipo de monitoramento. A evolução prevista inclui a substituição dos LEDs por um <strong>módulo relé</strong>. Quando o LED vermelho acenderia (T < 28°C), o relé fecharia o circuito, acionando uma bomba de circulação para passar a água por coletores solares ou ligando uma resistência de aquecimento auxiliar. Os dados seriam enviados via Wi-Fi (ESP8266) para um dashboard IoT, permitindo o histórico de temperatura em tempo real no celular.</p>
-            </article>
         </section>
 
-        <!-- ABA 6: ACESSIBILIDADE -->
         <section id="acessibilidade" role="tabpanel" aria-labelledby="tab-acessibilidade" class="tab-content hidden">
-            <h2>Acessibilidade e Inclusão: A Base do Projeto</h2>
-            
+            <h2>Acessibilidade e Inclusão</h2>
             <article class="concept-card">
-                <h3>1. Contexto Legal e Dados Reais</h3>
-                <p>A acessibilidade digital não é um "extra" ou um favor; é um direito humano fundamental e um requisito legal. No Brasil, a <strong>Lei Brasileira de Inclusão (LBI, Lei 13.146/2015)</strong> estabelece que é dever do Estado e da sociedade garantir o acesso à informação. O <strong>Decreto 5.296/2004</strong> regulamenta a acessibilidade em sítios web. Além disso, a <strong>Lei 10.436/2002</strong> reconhece a Libras como meio legal de comunicação e expressão.</p>
-                <p>Segundo o <strong>Censo do IBGE de 2022</strong>, aproximadamente <strong>18,6 milhões de pessoas</strong> no Brasil possuem algum tipo de deficiência (visual, auditiva, motora ou intelectual). Ignorar a acessibilidade é excluir quase 10% da população de consumir conteúdo educacional.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>2. Por que VLibras e Libras em um site de Física?</h3>
-                <p>O widget <strong>VLibras</strong> foi integrado para fornecer um avatar de tradução automática de texto para Libras. Embora a tradução automática não seja perfeita (a estrutura sintática da Libras é diferente do Português), ela oferece uma camada crucial de compreensão para pessoas surdas. Um site educacional de Física e Robótica é, por natureza, denso em jargões. A presença do VLibras, combinada com uma redação clara (Linguagem Simples), reduz a barreira de entrada. O site está estruturado para, no futuro, receber vídeos em Libras gravados por humanos, que são o padrão-ouro de acessibilidade para surdos.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>3. Dislexia, Contraste e Navegação</h3>
-                <p><strong>Fonte para Dislexia:</strong> A fonte OpenDyslexic (disponível no painel de acessibilidade) possui letras com base mais pesada e formas únicas. Isso ajuda a evitar que o cérebro de pessoas com dislexia "gire" ou confunda letras semelhantes (como 'b' e 'd' ou 'p' e 'q'), reduzindo a sobrecarga visual e a fadiga na leitura de textos longos de física.</p>
-                <p><strong>Alto Contraste e Daltonismo:</strong> O modo de alto contraste (preto e amarelo/branco) garante uma taxa de contraste superior a 7:1, muito acima do mínimo de 4.5:1 exigido pelo WCAG 2.1 AA. Isso beneficia pessoas com baixa visão, catarata ou daltonismo. Nunca usamos apenas a cor para transmitir informação (ex: no simulador, usamos texto + cor + ícone para indicar o estado do LED).</p>
-                <p><strong>Navegação por Teclado:</strong> Todo o site pode ser operado sem mouse. O foco é sempre visível (outline de 3px). Usuários de leitores de tela (como NVDA) podem navegar por landmarks (<code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>) e os simuladores anunciam suas mudanças de estado via <code>aria-live="polite"</code>.</p>
-            </article>
-
-            <article class="concept-card">
-                <h3>4. Conclusão: Impacto Social</h3>
-                <p>Desenvolver o AQUASOL com acessibilidade nativa desde a primeira linha de código demonstra que a tecnologia educacional pode e deve ser universal. A inclusão amplia o impacto social do projeto, transformando um simples trabalho escolar em uma ferramenta de democratização do conhecimento científico.</p>
+                <h3>Por que incluímos cada recurso?</h3>
+                <p>Segundo o <strong>Censo do IBGE de 2022</strong>, cerca de 18,6 milhões de pessoas no Brasil possuem algum tipo de deficiência. A <strong>Lei Brasileira de Inclusão (13.146/2015)</strong> garante o acesso à informação. O widget VLibras, a fonte para dislexia e o alto contraste não são "extras", são pré-requisitos para que a ciência seja verdadeiramente democrática.</p>
             </article>
         </section>
 
-        <!-- ABA 7: SOBRE -->
         <section id="sobre" role="tabpanel" aria-labelledby="tab-sobre" class="tab-content hidden">
             <h2>Sobre o Projeto</h2>
-            
-            <div class="about-grid">
-                <div class="concept-card">
-                    <h3>Equipe e Objetivo</h3>
-                    <p><strong>Objetivo:</strong> Desenvolver e documentar um sistema de aquecimento solar de piscina de baixo custo, monitorado por sensores Arduino, com foco total na divulgação científica acessível.</p>
-                    <p><strong>Equipe:</strong> Bianca Vogt Barbosa, Davi Vianna, Gabriel Henrique, Lucca Ceron.</p>
-                </div>
-                
-                <div class="concept-card">
-                    <h3>Cronograma Resumido</h3>
-                    <ul class="timeline">
-                        <li><strong>Mês 1:</strong> Pesquisa teórica (Física e Acessibilidade) e compra de componentes.</li>
-                        <li><strong>Mês 2:</strong> Montagem do circuito no Tinkercad e prototipagem física.</li>
-                        <li><strong>Mês 3:</strong> Desenvolvimento do site, simuladores e testes de usabilidade com leitores de tela.</li>
-                        <li><strong>Mês 4:</strong> Apresentação final e publicação no GitHub Pages.</li>
-                    </ul>
-                </div>
-
-                <div class="concept-card">
-                    <h3>Referências Bibliográficas</h3>
-                    <ul>
-                        <li>HALLIDAY, D.; RESNICK, R.; WALKER, J. <em>Fundamentos de Física: Óptica e Física Moderna</em>. Vol. 4. Rio de Janeiro: LTC, 2023.</li>
-                        <li>NUSSENZVEIG, H. M. <em>Curso de Física Básica: Óptica</em>. Vol. 4. São Paulo: Blucher, 2015.</li>
-                        <li>W3C. <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. Disponível em: w3.org/TR/WCAG21/. Acesso em: nov. 2026.</li>
-                        <li>IBGE. <em>Censo Demográfico 2022: Pessoas com Deficiência</em>. Rio de Janeiro: IBGE, 2023.</li>
-                        <li>NASA. <em>Earth's Energy Budget</em>. Disponível em: science.nasa.gov. Acesso em: nov. 2026.</li>
-                    </ul>
-                </div>
-
-                <div class="concept-card">
-                    <h3>Mapa do Site</h3>
-                    <ul>
-                        <li><a href="#inicio">Início</a> (Apresentação e Quiz)</li>
-                        <li><a href="#fisica">Física</a> (Radiação, Leis de Stefan-Boltzmann, Wien, Kirchhoff)</li>
-                        <li><a href="#materiais">Materiais</a> (Interação da luz, efeito estufa, balanço energético)</li>
-                        <li><a href="#simuladores">Simuladores</a> (Fóton, Cobertura, Cor, Arduino Virtual)</li>
-                        <li><a href="#robotica">Robótica</a> (Sensores, Código, Diagrama)</li>
-                        <li><a href="#acessibilidade">Acessibilidade</a> (Justificativa teórica e legal)</li>
-                        <li><a href="#sobre">Sobre</a> (Equipe, Referências, Mapa)</li>
-                    </ul>
-                </div>
-            </div>
+            <article class="concept-card">
+                <h3>Equipe</h3>
+                <p><strong>Equipe:</strong> Bianca Vogt Barbosa, Davi Vianna, Gabriel Henrique, Lucca Ceron.</p>
+            </article>
+            <article class="concept-card">
+                <h3>Referências</h3>
+                <ul>
+                    <li>HALLIDAY, D. Fundamentos de Física: Óptica e Física Moderna. Vol. 4.</li>
+                    <li>W3C. Web Content Accessibility Guidelines (WCAG) 2.1.</li>
+                    <li>IBGE. Censo Demográfico 2022: Pessoas com Deficiência.</li>
+                </ul>
+            </article>
         </section>
-
     </main>
 
     <footer role="contentinfo">
         <p>&copy; 2026 Projeto AQUASOL. Desenvolvido com HTML5, CSS3 e JS Vanilla. Comprometido com a Acessibilidade Digital (WCAG 2.1 AA).</p>
     </footer>
 
-    <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+        <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 
-    <!-- Scripts do Projeto -->
-    <script src="js/acessibilidade.js"></script>
-    <script src="js/simulador-foton.js"></script>
-    <script src="js/simulador-cobertura.js"></script>
-    <script src="js/simulador-cor.js"></script>
-    <script src="js/simulador-arduino.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+            const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navUl = document.querySelector('nav ul');
+            
+            menuBtn.addEventListener('click', () => {
+                const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+                menuBtn.setAttribute('aria-expanded', !isExpanded);
+                navUl.classList.toggle('expanded');
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    tabs.forEach(t => { t.setAttribute('aria-selected', 'false'); t.classList.remove('active'); });
+                    panels.forEach(p => p.classList.add('hidden'));
+                    tab.setAttribute('aria-selected', 'true');
+                    tab.classList.add('active');
+                    document.getElementById(tab.getAttribute('href').substring(1)).classList.remove('hidden');
+                    navUl.classList.remove('expanded');
+                    updateTrail(tab.getAttribute('href').substring(1));
+                });
+            });
+
+            function updateTrail(sectionId) {
+                let visited = JSON.parse(localStorage.getItem('aquasol_visited') || '[]');
+                if (!visited.includes(sectionId)) {
+                    visited.push(sectionId);
+                    localStorage.setItem('aquasol_visited', JSON.stringify(visited));
+                }
+                const progress = Math.min((visited.length / 7) * 100, 100);
+                document.getElementById('progress-bar').style.width = `${progress}%`;
+                document.getElementById('trail-text').textContent = `Você explorou ${Math.round(progress)}% do conteúdo.`;
+            }
+            updateTrail('inicio');
+
+            document.getElementById('presentation-mode-btn').addEventListener('click', () => {
+                document.body.classList.toggle('presentation-mode');
+            });
+
+            const toggleBtn = document.getElementById('toggle-access-menu');
+            const options = document.getElementById('access-options');
+            toggleBtn.addEventListener('click', () => {
+                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                toggleBtn.setAttribute('aria-expanded', !isExpanded);
+                options.classList.toggle('hidden');
+            });
+
+            document.getElementById('font-increase').addEventListener('click', () => {
+                const current = parseFloat(window.getComputedStyle(document.body).fontSize);
+                if(current < 32) document.body.style.fontSize = `${current + 2}px`;
+            });
+            document.getElementById('font-decrease').addEventListener('click', () => {
+                const current = parseFloat(window.getComputedStyle(document.body).fontSize);
+                if(current > 12) document.body.style.fontSize = `${current - 2}px`;
+            });
+            document.getElementById('font-reset').addEventListener('click', () => { document.body.style.fontSize = ''; });
+            
+            ['toggle-dyslexic', 'toggle-contrast', 'toggle-dark', 'toggle-underline', 'toggle-motion'].forEach(id => {
+                document.getElementById(id).addEventListener('click', () => {
+                    const cls = id.replace('toggle-', '').replace('contrast', 'alto-contraste').replace('dark', 'modo-escuro').replace('underline', 'links-sublinhados').replace('motion', 'reduzir-movimento').replace('dyslexic', 'fonte-dislexia');
+                    document.body.classList.toggle(cls);
+                });
+            });
+
+            document.getElementById('speak-page').addEventListener('click', () => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(document.querySelector('.tab-content.active').innerText);
+                    utterance.lang = 'pt-BR';
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+
+            const materials = {
+                preto: { a: 95, r: 5, t: 0, desc: "O preto absorve quase toda a energia, convertendo-a em calor." },
+                branco: { a: 20, r: 80, t: 0, desc: "O branco reflete a maior parte da luz visível, absorvendo pouco calor." },
+                agua: { a: 40, r: 10, t: 50, desc: "A água absorve o infravermelho, mas transmite grande parte do visível." },
+                vidro: { a: 10, r: 15, t: 75, desc: "O vidro transmite a luz visível, mas bloqueia o infravermelho (efeito estufa)." }
+            };
+            document.getElementById('btn-fire-photon').addEventListener('click', () => {
+                const mat = materials[document.getElementById('material-select').value];
+                document.getElementById('bar-a').style.width = `${mat.a}%`; document.getElementById('val-a').textContent = mat.a;
+                document.getElementById('bar-r').style.width = `${mat.r}%`; document.getElementById('val-r').textContent = mat.r;
+                document.getElementById('bar-t').style.width = `${mat.t}%`; document.getElementById('val-t').textContent = mat.t;
+                document.getElementById('foton-explanation').textContent = mat.desc;
+            });
+
+            const sliderTemp = document.getElementById('sim-temp');
+            const ledRed = document.getElementById('led-red-virtual');
+            const ledGreen = document.getElementById('led-green-virtual');
+            
+            function updateArduino() {
+                const tempADC = parseInt(sliderTemp.value);
+                document.getElementById('temp-adc-val').textContent = tempADC;
+                document.getElementById('calc-adc').textContent = tempADC;
+                
+                const voltagem = (tempADC / 1023.0) * 5.0;
+                const temperaturaC = (voltagem - 0.5) * 100.0;
+                
+                document.getElementById('calc-v').textContent = voltagem.toFixed(2);
+                document.getElementById('calc-v2').textContent = voltagem.toFixed(2);
+                document.getElementById('calc-t').textContent = temperaturaC.toFixed(1);
+                
+                if (temperaturaC < 28.0) {
+                    ledRed.className = 'led red on'; ledGreen.className = 'led green off';
+                } else {
+                    ledRed.className = 'led red off'; ledGreen.className = 'led green on';
+                }
+                document.getElementById('serial-output').textContent = `Temp: ${temperaturaC.toFixed(2)} C`;
+            }
+            sliderTemp.addEventListener('input', updateArduino);
+            updateArduino();
+        });
+    </script>
 </body>
 </html>
