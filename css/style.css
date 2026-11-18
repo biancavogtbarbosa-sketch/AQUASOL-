@@ -1,0 +1,331 @@
+/* =========================================
+   VARIÁVEIS E RESET (Mobile First)
+   ========================================= */
+:root {
+    --azul-agua: #00B4D8;
+    --azul-profundo: #0077B6;
+    --verde-agua: #06D6A0;
+    --amarelo-solar: #FFD166;
+    --laranja: #F4A261;
+    --coral: #E76F51;
+    --roxo-uv: #7B2CBF;
+    --fundo-claro: #FDF8F0;
+    --texto-escuro: #1A1A1A;
+    --fundo-escuro: #0B132B;
+    --texto-claro: #E0E1DD;
+    
+    --fonte-padrao: 'Inter', sans-serif;
+    --espacamento-padrao: 1rem;
+    --borda-raio: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-padrao);
+    background-color: var(--fundo-claro);
+    color: var(--texto-escuro);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* =========================================
+   ACESSIBILIDADE BÁSICA
+   ========================================= */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--roxo-uv);
+    color: white;
+    padding: 8px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+:focus-visible {
+    outline: 3px solid var(--amarelo-solar);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   HEADER E NAVEGAÇÃO
+   ========================================= */
+header {
+    background: linear-gradient(135deg, var(--amarelo-solar), var(--azul-agua));
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo-container h1 {
+    font-size: 1.8rem;
+    color: var(--azul-profundo);
+}
+
+.slogan {
+    font-style: italic;
+    color: var(--texto-escuro);
+    font-size: 0.9rem;
+}
+
+.mobile-menu-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--azul-profundo);
+    color: white;
+    border: none;
+    border-radius: var(--borda-raio);
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: none; /* Escondido no mobile até clicar */
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+nav ul.expanded {
+    display: flex;
+}
+
+.tab-link {
+    display: block;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: var(--texto-escuro);
+    background: rgba(255,255,255,0.7);
+    border-radius: var(--borda-raio);
+    font-weight: 600;
+    text-align: center;
+    border-left: 5px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-link.active {
+    background: white;
+    border-left-color: var(--coral);
+    color: var(--azul-profundo);
+}
+
+/* =========================================
+   CONTEÚDO PRINCIPAL E CARDS
+   ========================================= */
+main {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to bottom, var(--amarelo-solar), var(--fundo-claro));
+    border-radius: var(--borda-raio);
+    margin-bottom: 2rem;
+}
+
+.concept-card {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--borda-raio);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--azul-agua);
+}
+
+.concept-card:nth-child(even) {
+    border-top-color: var(--verde-agua);
+}
+
+.formula {
+    background: var(--fundo-claro);
+    padding: 1rem;
+    border-left: 4px solid var(--roxo-uv);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   SIMULADORES
+   ========================================= */
+.simulator-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--borda-raio);
+    margin-bottom: 2rem;
+    border: 2px solid var(--azul-agua);
+}
+
+.sim-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: center;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--borda-raio);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--azul-profundo);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--verde-agua);
+    color: var(--texto-escuro);
+}
+
+.bar-chart {
+    margin-top: 1rem;
+}
+
+.bar-bg {
+    background: #eee;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.5s ease-out;
+}
+
+.arduino-board {
+    background: #2C3E50;
+    color: white;
+    padding: 1rem;
+    border-radius: var(--borda-raio);
+    font-family: monospace;
+}
+
+.leds-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.led {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.led.red.on { background: #FF0000; box-shadow: 0 0 10px #FF0000; }
+.led.red.off { background: #550000; }
+.led.green.on { background: #00FF00; box-shadow: 0 0 10px #00FF00; }
+.led.green.off { background: #003300; }
+
+.serial-monitor {
+    background: black;
+    color: #00FF00;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    min-height: 60px;
+}
+
+/* =========================================
+   MODO APRESENTAÇÃO
+   ========================================= */
+body.presentation-mode {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+body.presentation-mode .concept-card {
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Tablet e Desktop)
+   ========================================= */
+@media (min-width: 768px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .tab-link {
+        flex: 1;
+        text-align: center;
+        border-left: none;
+        border-bottom: 5px solid transparent;
+    }
+
+    .tab-link.active {
+        border-bottom-color: var(--coral);
+        border-left: none;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .simulator-box {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        align-items: start;
+    }
+    
+    .sim-display {
+        grid-column: 2;
+    }
+}
