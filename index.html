@@ -242,22 +242,30 @@
             backdrop-filter: blur(10px);
         }
         
-        .concept-card { 
-            background: rgba(255,255,255,0.95); 
+                .concept-card { 
             padding: 1.5rem; 
             margin-bottom: 1.5rem; 
             border-radius: var(--borda-raio); 
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
             border-top: 4px solid var(--azul-agua); 
             backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #FFF8E7 0%, #FFFFFF 100%);
         }
-        
         .concept-card:nth-child(even) { 
-            border-top-color: var(--verde-agua); 
+            border-top-color: var(--verde-agua);
+            background: linear-gradient(135deg, #EAFBF3 0%, #FFFFFF 100%);
         }
-        
         .concept-card:nth-child(3n) { 
-            border-top-color: var(--laranja); 
+            border-top-color: var(--laranja);
+            background: linear-gradient(135deg, #FDEEE8 0%, #FFFFFF 100%);
+        }
+        .concept-card:nth-child(4n) { 
+            border-top-color: var(--roxo-uv);
+            background: linear-gradient(135deg, #F3E8FB 0%, #FFFFFF 100%);
+        }
+        .concept-card:nth-child(5n) { 
+            border-top-color: var(--azul-profundo);
+            background: linear-gradient(135deg, #E8F4FB 0%, #FFFFFF 100%);
         }
         
         .formula { 
@@ -462,15 +470,18 @@
         .code-block .string { color: #ce9178; }
         .code-block .comment { color: #6a9955; }
         
-        .accessibility-feature {
+                .accessibility-feature {
             display: flex;
             align-items: start;
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding: 1rem;
-            background: rgba(255,255,255,0.9);
+            background: linear-gradient(135deg, #F3E8FB 0%, #FFFFFF 100%);
             border-radius: 8px;
             border-left: 4px solid var(--roxo-uv);
+        }
+        .accessibility-feature:nth-child(even) {
+            background: linear-gradient(135deg, #E8F8FB 0%, #FFFFFF 100%);
         }
         
         .accessibility-feature:nth-child(even) {
@@ -482,8 +493,8 @@
             flex-shrink: 0;
         }
         
-        .physics-question {
-            background: linear-gradient(135deg, rgba(255,209,102,0.2), rgba(0,180,216,0.2));
+               .physics-question {
+            background: linear-gradient(135deg, #FFF3D6 0%, #E0F7FA 100%);
             padding: 1.5rem;
             border-radius: 8px;
             margin: 1.5rem 0;
@@ -1293,8 +1304,48 @@ body.reduzir-movimento .bar-fill {
                 document.getElementById('bar-r').style.width = `${mat.r}%`; document.getElementById('val-r').textContent = mat.r;
                 document.getElementById('bar-t').style.width = `${mat.t}%`; document.getElementById('val-t').textContent = mat.t;
                 document.getElementById('foton-explanation').textContent = mat.desc;
+                animatePhotons(document.getElementById('material-select').value, mat);
             });
 
+            function animatePhotons(material, props) {
+                const canvas = document.getElementById('photon-canvas');
+                // limpa fótons antigos (mantém a linha e o label)
+                canvas.querySelectorAll('.photon').forEach(p => p.remove());
+                canvas.className = 'photon-canvas-wrap mat-' + material;
+                const total = 12;
+                let nAbs = Math.round(total * props.a / 100);
+                let nRef = Math.round(total * props.r / 100);
+                let nTra = total - nAbs - nRef;
+                let tipos = [];
+                for (let i = 0; i < nAbs; i++) tipos.push('abs');
+                for (let i = 0; i < nRef; i++) tipos.push('ref');
+                for (let i = 0; i < nTra; i++) tipos.push('tra');
+                tipos.sort(() => Math.random() - 0.5); // embaralha
+                tipos.forEach((tipo, idx) => {
+                    const p = document.createElement('div');
+                    p.className = 'photon';
+                    p.style.top = (14 + idx * 9) + 'px';
+                    p.style.left = '6px';
+                    canvas.appendChild(p);
+                    setTimeout(() => {
+                        if (tipo === 'abs') {
+                            p.style.left = '46%';
+                            p.style.background = '#E76F51';
+                            p.style.boxShadow = '0 0 12px #E76F51';
+                            setTimeout(() => { p.style.opacity = '0'; }, 700);
+                        } else if (tipo === 'ref') {
+                            p.style.left = '6px';
+                            p.style.top = (14 + idx * 9 - 50) + 'px';
+                            p.style.background = '#FFD166';
+                        } else {
+                            p.style.left = '94%';
+                            p.style.background = '#00B4D8';
+                            p.style.boxShadow = '0 0 10px #00B4D8';
+                        }
+                    }, 120 + idx * 70);
+                });
+            }
+            
             const sliderTemp = document.getElementById('sim-temp');
             const ledRed = document.getElementById('led-red-virtual');
             const ledGreen = document.getElementById('led-green-virtual');
