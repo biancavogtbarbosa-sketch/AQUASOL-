@@ -1575,10 +1575,35 @@ body.reduzir-movimento .bar-fill {
             });
             document.getElementById('font-reset').addEventListener('click', () => { document.body.style.fontSize = ''; });
             
-            ['toggle-dyslexic', 'toggle-contrast', 'toggle-dark', 'toggle-underline', 'toggle-motion'].forEach(id => {
+                        ['toggle-dyslexic', 'toggle-contrast', 'toggle-dark', 'toggle-underline', 'toggle-motion'].forEach(id => {
                 document.getElementById(id).addEventListener('click', () => {
                     const cls = id.replace('toggle-', '').replace('contrast', 'alto-contraste').replace('dark', 'modo-escuro').replace('underline', 'links-sublinhados').replace('motion', 'reduzir-movimento').replace('dyslexic', 'fonte-dislexia');
                     document.body.classList.toggle(cls);
+                    
+                    // FORÇAR MENU DE ACESSIBILIDADE NO MODO ESCURO
+                    if (cls === 'modo-escuro') {
+                        const isDark = document.body.classList.contains('modo-escuro');
+                        const menu = document.getElementById('access-options');
+                        const buttons = menu.querySelectorAll('button');
+                        
+                        if (isDark) {
+                            menu.style.background = '#1a1a2e';
+                            menu.style.border = '2px solid #7B2CBF';
+                            buttons.forEach(btn => {
+                                btn.style.background = '#2a2a4e';
+                                btn.style.color = '#FFFFFF';
+                                btn.style.border = '1px solid #7B2CBF';
+                            });
+                        } else {
+                            menu.style.background = 'white';
+                            menu.style.border = '2px solid #7B2CBF';
+                            buttons.forEach(btn => {
+                                btn.style.background = '#f0f0f0';
+                                btn.style.color = '#1A1A1A';
+                                btn.style.border = '1px solid #ccc';
+                            });
+                        }
+                    }
                 });
             });
 
